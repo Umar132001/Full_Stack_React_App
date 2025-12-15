@@ -17,6 +17,11 @@ export default function Tasks() {
     setTitle("");
   };
 
+  const deleteTask = async (id) => {
+    await api.delete(`/tasks/${id}`);
+    setTasks((prev) => prev.filter((task) => task._id !== id));
+  };
+
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Tasks</h2>
@@ -39,9 +44,21 @@ export default function Tasks() {
         </button>
       </form>
 
-      <ul>
-        {Array.isArray(tasks) &&
-          tasks.map((t) => <li key={t._id}>{t.title}</li>)}
+      <ul className="space-y-2">
+        {tasks.map((t) => (
+          <li
+            key={t._id}
+            className="flex justify-between items-center border p-2 rounded"
+          >
+            <span>{t.title}</span>
+            <button
+              onClick={() => deleteTask(t._id)}
+              className="text-red-600 hover:underline"
+            >
+              Delete
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );
