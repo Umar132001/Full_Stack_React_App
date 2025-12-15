@@ -22,6 +22,12 @@ export default function Tasks() {
     setTasks((prev) => prev.filter((task) => task._id !== id));
   };
 
+  const toggleTask = async (id) => {
+    const res = await api.patch(`/tasks/${id}`);
+
+    setTasks((prev) => prev.map((task) => (task._id === id ? res.data : task)));
+  };
+
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Tasks</h2>
@@ -48,12 +54,19 @@ export default function Tasks() {
         {tasks.map((t) => (
           <li
             key={t._id}
-            className="flex justify-between items-center border p-2 rounded"
+            className={`flex justify-between items-center border p-2 rounded cursor-pointer ${
+              t.completed ? "bg-green-100 line-through text-gray-500" : ""
+            }`}
+            onClick={() => toggleTask(t._id)}
           >
             <span>{t.title}</span>
+
             <button
-              onClick={() => deleteTask(t._id)}
-              className="text-red-600 hover:underline"
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTask(t._id);
+              }}
+              className="text-red-600 hover:underline cursor-pointer"
             >
               Delete
             </button>

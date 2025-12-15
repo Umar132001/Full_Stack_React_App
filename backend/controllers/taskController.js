@@ -38,3 +38,24 @@ export const deleteTask = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const toggleTask = async (req, res) => {
+  try {
+    const task = await Task.findOne({
+      _id: req.params.id,
+      user: req.user.id, // 🔐 ownership check
+    });
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    task.completed = !task.completed;
+    await task.save();
+
+    res.json(task);
+  } catch (err) {
+    logger.error(err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
