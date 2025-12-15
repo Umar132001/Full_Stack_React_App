@@ -43,7 +43,7 @@ export default function Dashboard() {
 
             {/* Actions */}
             <button
-              className="w-full bg-red-500 text-white py-2 rounded-lg font-medium hover:bg-red-600 transition"
+              className="w-full bg-red-500 cursor-pointer text-white py-2 rounded-lg font-medium hover:bg-red-600 transition"
               onClick={() => {
                 localStorage.removeItem("token");
                 window.location.href = "/login";
