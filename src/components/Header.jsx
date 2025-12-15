@@ -12,6 +12,9 @@ export default function Header() {
           <Link to="/home" className="hover:underline">
             Home
           </Link>
+          <Link to="/tasks" className="hover:underline">
+            Task
+          </Link>
           <Link to="/about" className="hover:underline">
             About
           </Link>

@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import Tasks from "./pages/Tasks";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route element={<Layout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/tasks" element={<Tasks />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
 
